@@ -1,6 +1,6 @@
 function Battle() {
 
-  this.maintank = new myTank("Main Tank", getRandomNumber(150, 250), 2200);
+  this.maintank = new myTank("Main Tank", getRandomNumber(150, 250), 3200);
   this.level = null;
   this.armyoftanks = [];
   this.enemyLasers =[]
@@ -35,10 +35,11 @@ var nextButton = document.createElement('button');
 nextButton.innerHTML = "Next Level"
 nextButton.style.display = 'none'
 rootId.appendChild(nextButton)
-
+nextButton.id ='next';
 var restart = document.createElement('button');
 restart.innerHTML = "restart"
 restart.style.display = 'none'
+restart.id = 'restart';
 rootId.appendChild(restart)
 
 this.setLocalStorageLevel = () => {
@@ -94,18 +95,18 @@ nextButton.addEventListener("click" ,() =>{
         this.x = getRandomNumber(10 , 800);
       
         this.y = 10 ;
-      var army = new armyOfTanks("tank" + i, getRandomNumber(150, 220), 2200 , element , this.x , this.y);
+      var army = new armyOfTanks("tank" + i, getRandomNumber(40, 80), 2200 , element , this.x , this.y);
       this.armyoftanks.push(army);
        enemySpeed.push(3)
         counter++
       enemies.push(army);
-        
+      
         if(counter == this.level){
           clearInterval(c)
         
         }
       
-      },10000) 
+      },3000) 
       
  }
  setInterval(()=>{
@@ -143,12 +144,17 @@ setInterval(()=>{
         this.enemyLasers.push(enemy);
      
       }
-      this.movingLaser()
+      this.printTheWinner()
     }
     
 
 },3000)
-
+   setInterval (()=> {
+    this.movingLaser()
+    this.checkAmry();
+    
+   
+  } , 20)
   }
   
 
@@ -159,10 +165,14 @@ setInterval(()=>{
       this.movingLaser = () =>{
             intervals.push(null);
             laserSpeed.push(5);
+          // setInterval(()=> {
+
+          
             for(let i = 0 ; i < this.enemyLasers.length; i++){
+             
             if(this.enemyLasers[i]!= undefined){
 
-              intervals[i]  =  setInterval(()=>{
+              // intervals[i]  =  setInterval(()=>{
                   
                 if(this.enemyLasers[i] != undefined){
                 
@@ -171,11 +181,12 @@ setInterval(()=>{
 
                 if(  this.enemyLasers[i].y > heroj.Y - 40 &&  this.enemyLasers[i].y 
                   + 40 < heroj.Y + 50 &&   this.enemyLasers[i].x > heroj.X &&   this.enemyLasers[i].x < heroj.X + 50){
-                    
+                    clearInterval(this.enemyLasers[i].interval)
                      this.enemyLasers[i].element.remove()
-                     this.enemyLasers.splice(this.enemyLasers[i] , 1 )
-
-                     clearInterval(intervals[i]);
+                     
+                    //  this.enemyLasers.splice(this.enemyLasers[i] , 1 )
+                        
+                     
 
                      intervals[i] = null;
                      intervals.splice(intervals[i] , 1)
@@ -187,30 +198,32 @@ setInterval(()=>{
                   }
               }
                
-
+                
                     if(this.enemyLasers[i] != undefined) {
                     if(this.enemyLasers[i].y > 460) {
                         this.enemyLasers[i].element.remove()
-                        console.log(this.enemyLasers.indexOf(this.enemyLasers[i]) +  "       index od laser")
-                        console.log(intervals.indexOf(intervals[i]) + '    index od interval')
-                        this.enemyLasers.splice(this.enemyLasers[i] , 1 )
-                       laserSpeed[i] = 0 ;
-                       laserSpeed.splice(laserSpeed[i] , 1)
-                      clearInterval(intervals[i])
+                      // console.log(this.enemyLasers[i].interval)
+                     
+                      //  laserSpeed[i] = 0 ;
+                      
+                      clearInterval(this.enemyLasers[i].interval)
+                      
+                      // this.enemyLasers.splice(this.enemyLasers[i] , 1 )
                       intervals.splice(intervals[i] , 1)
                      
                 }
               }
               
                 if( this.printTheWinner()){
-                  clearInterval(intervals[i])
+                  // clearInterval(this.enemyLasers[i].interval)
                 }
                 this.removingEnemiies()
               
+            
               
-              }, 20)
             }
           }
+        // } , 20)
         }
   
 
@@ -353,7 +366,7 @@ setInterval(()=>{
 
   }
 
-  this.checkAmry = function () {
+  this.checkAmry =  function() {
 
     for (var i = 0; i < this.armyoftanks.length; i++) {
    
@@ -369,7 +382,7 @@ setInterval(()=>{
     var army = this.checkAmry();
     
     if (!army) {
-      console.log(army)
+   
       winner.style.display = "block";
       winner.innerHTML = "you win";
 

@@ -8,9 +8,15 @@ function enemyLaser (x , y , element){
   
   
    this.Position = (y)=>{
-      
-     this.y = y
+  
+     
+   }
+   this.interval = setInterval(()=> {
+    this.y+=4 
        
     this.element.style.top = this.y + 'px';
-   }
+   
+   } , 10)    
+
+  
 }

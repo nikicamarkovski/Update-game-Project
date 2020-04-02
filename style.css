@@ -100,10 +100,10 @@ p {
 }
 #win {
     color:red;
-    font-size :120px;
+    font-size :80px;
     position : absolute ;
-    top : 30%;
-    left:25%;
+    top : 15%;
+    left:40%;
 }
 #repair {
     width: 80px;;
@@ -112,4 +112,16 @@ p {
     right: -200px;
     top:30px;
 
+}
+
+#next {
+    position : absolute ;
+    top : 52%;
+    left:43%;
+}
+
+#restart {
+    position : absolute ;
+    top : 40%;
+    left:50%;
 }

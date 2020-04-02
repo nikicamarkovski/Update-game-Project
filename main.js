@@ -29,8 +29,8 @@ Main();
 
 // var lastLoopRun = 0;
 
-// var hero = new Object();
-// hero.element = 'hero';
+// var heroj = new Object();
+// hero.element = 'heroj';
 // hero.x = 250;
 // hero.y = 460;
 
@@ -75,7 +75,7 @@ Main();
 // }
 
 // function showSprites() {
-//   setPosition(hero);
+//   setPosition(heroj);
 // }
 
 // function loop() {
