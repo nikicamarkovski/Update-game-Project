@@ -12,7 +12,7 @@ function enemyLaser (x , y , element){
      
    }
    this.interval = setInterval(()=> {
-    this.y+=4 
+    this.y+=8 
        
     this.element.style.top = this.y + 'px';
    

@@ -22,8 +22,10 @@ function armyOfTanks (name , damage , health , element ,x ,y ) {
 
  
    enemyHealth.id = "enemyHealth";
-
- 
+    enemyHealth.style.fontSize = '22px'
+    enemyHealth.style.margin ='2px';
+    enemyHealth.style.padding ='5px'
+    enemyHealth.style.marginLeft = '-210px'
   this.EnemyHealth = function () {
 
    

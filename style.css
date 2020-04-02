@@ -1,3 +1,10 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
 #root {
 
     position: relative;
@@ -122,6 +129,6 @@ p {
 
 #restart {
     position : absolute ;
-    top : 40%;
-    left:50%;
+    top : 52%;
+    left:43%;
 }

@@ -1,6 +1,6 @@
 function Battle() {
 
-  this.maintank = new myTank("Main Tank", getRandomNumber(150, 250), 3200);
+  this.maintank = new myTank("Main Tank", 230, 3200);
   this.level = null;
   this.armyoftanks = [];
   this.enemyLasers =[]
@@ -70,7 +70,7 @@ nextButton.addEventListener("click" ,() =>{
   var  b = Number(localStorage.getItem('level'))
   b++;
   localStorage.setItem('level' , b);
-  // localStorage.clear()
+  
      
       window.location.reload(true);
 })
@@ -106,20 +106,20 @@ nextButton.addEventListener("click" ,() =>{
         
         }
       
-      },3000) 
+      },5000) 
       
  }
  setInterval(()=>{
   
     for(var i = 0 ; i < this.armyoftanks.length; i++){
-      if(this.armyoftanks[i].x < 20){
-       var some =  getRandomNumber( 1, 4)
+      if(this.armyoftanks[i].x < 10){
+       var some =  getRandomNumber( 4, 6)
         enemySpeed[i] = 0
          enemySpeed[i] = + some
         
        } 
-       if(this.armyoftanks[i].x > 800){
-        var some =  getRandomNumber( 1, 4)
+       if(this.armyoftanks[i].x > 850){
+        var some =  getRandomNumber( 4, 6)
         enemySpeed[i] = 0
         enemySpeed[i] = -some
        
@@ -138,7 +138,7 @@ setInterval(()=>{
         var laser = document.createElement('span');
         laser.id = 'laser';
         rootId.appendChild(laser);
-       var x =  this.armyoftanks[i].x +15
+       var x =  this.armyoftanks[i].x +25
        var y = this.armyoftanks[i].y +10
         var enemy = new enemyLaser(x,y,laser)
         this.enemyLasers.push(enemy);
@@ -148,7 +148,7 @@ setInterval(()=>{
     }
     
 
-},3000)
+},1500)
    setInterval (()=> {
     this.movingLaser()
     this.checkAmry();
@@ -161,18 +161,18 @@ setInterval(()=>{
   var laserSpeed = []
  
      
-    var intervals = []
+    
       this.movingLaser = () =>{
-            intervals.push(null);
+           
             laserSpeed.push(5);
-          // setInterval(()=> {
+        
 
           
             for(let i = 0 ; i < this.enemyLasers.length; i++){
              
             if(this.enemyLasers[i]!= undefined){
 
-              // intervals[i]  =  setInterval(()=>{
+             
                   
                 if(this.enemyLasers[i] != undefined){
                 
@@ -183,15 +183,8 @@ setInterval(()=>{
                   + 40 < heroj.Y + 50 &&   this.enemyLasers[i].x > heroj.X &&   this.enemyLasers[i].x < heroj.X + 50){
                     clearInterval(this.enemyLasers[i].interval)
                      this.enemyLasers[i].element.remove()
-                     
-                    //  this.enemyLasers.splice(this.enemyLasers[i] , 1 )
-                        
-                     
-
-                     intervals[i] = null;
-                     intervals.splice(intervals[i] , 1)
                     
-                  this.maintank.setHealth(this.maintank.getHealth() -  this.armyoftanks[0].damage);
+                  this.maintank.setHealth(this.maintank.getHealth() -  getRandomNumber(40 , 80));
                 
             
                  
@@ -202,21 +195,16 @@ setInterval(()=>{
                     if(this.enemyLasers[i] != undefined) {
                     if(this.enemyLasers[i].y > 460) {
                         this.enemyLasers[i].element.remove()
-                      // console.log(this.enemyLasers[i].interval)
-                     
-                      //  laserSpeed[i] = 0 ;
-                      
+                   
                       clearInterval(this.enemyLasers[i].interval)
-                      
-                      // this.enemyLasers.splice(this.enemyLasers[i] , 1 )
-                      intervals.splice(intervals[i] , 1)
+    
                      
                 }
               }
               
-                if( this.printTheWinner()){
-                  // clearInterval(this.enemyLasers[i].interval)
-                }
+                 this.printTheWinner()
+                 
+                
                 this.removingEnemiies()
               
             
@@ -239,8 +227,8 @@ setInterval(()=>{
   heroj.h = 50;
 
 
-  var HERO_MOVEMENT = 5;
-  var laserShoot = 10;
+  var HERO_MOVEMENT = 8;
+  var laserShoot = 12;
   
 
 
@@ -254,8 +242,8 @@ setInterval(()=>{
   this.keyPress = function (keyCode) {
 
 
-    if (heroj.X + heroj.w >= 880) {
-      heroj.X = 880 - heroj.w;
+    if (heroj.X + heroj.w >= 900) {
+      heroj.X = 900 - heroj.w;
 
     }
     if (heroj.Y >= 440) {
@@ -317,11 +305,11 @@ setInterval(()=>{
 
       for (let i = 0; i < this.armyoftanks.length; i++) {
         if (laserDiv.Y < this.armyoftanks[i].y + 40 && laserDiv.Y + 40 > this.armyoftanks[i].y && laserDiv.X > this.armyoftanks[i].x && laserDiv.X < this.armyoftanks[i].x + 50) {
-          this.armyoftanks[i].health -= this.maintank.getDamage()
+          this.armyoftanks[i].health -= getRandomNumber(160 , 280)
           
           clearInterval(a);
           laserDiv.remove();
-          this.coins += 100;
+          this.coins += getRandomNumber(40 , 120);
           coins.innerHTML ="Coins:  "+  this.coins;
           this.armyoftanks[i].EnemyHealth();
         
@@ -334,7 +322,7 @@ setInterval(()=>{
       this.maintank.Health();
       this.isMainTankStillAlive();
   
-     }, 15);
+     }, 10);
 
   }
 
@@ -361,6 +349,8 @@ setInterval(()=>{
    
       if (this.armyoftanks[i].health < 0) {
       this.armyoftanks[i].element.remove()
+      this.armyoftanks[i].x = -400
+   
       }
   }
 
@@ -408,7 +398,7 @@ setInterval(()=>{
 
   repair.addEventListener("click" ,  () => {
      
-             var price = 1000;
+             var price = 2000;
       if (this.coins < price) {
         message.innerHTML = "Not enought Coins"
       
@@ -416,7 +406,7 @@ setInterval(()=>{
       
       } else {
    this.maintank.setHealth(this.maintank.getHealth() + 800);
-   this.coins -= 1000;
+   this.coins -= 2000;
   coins.innerHTML=  this.coins ;
   message.innerHTML = "Repair on the way "
       }
